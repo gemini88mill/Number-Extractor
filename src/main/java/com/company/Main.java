@@ -1,5 +1,8 @@
 package com.company;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -26,17 +29,31 @@ public class Main {
         Main main = new Main();
 
         main.openCellularWorld();
+
     }
 
     private void openCellularWorld() {
         //todo open webpage
+
+
+        try {
+            Document document = Jsoup.connect(url).get();
+            String title = document.title();
+
+            System.out.println(document);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         try {
             URL insideCellularWorld = new URL(url);
             BufferedReader in = new BufferedReader(new InputStreamReader(insideCellularWorld.openStream()));
 
+
             String inputLine;
             while ((inputLine = in.readLine()) != null){
-                System.out.println(inputLine);
+                //System.out.println(inputLine);
+
             }
             in.close();
         } catch (MalformedURLException e) {
